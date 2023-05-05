@@ -31,13 +31,14 @@ Example request: http://localhost:8221/activity?type=recreational&participants=1
 
 # RECEIVING DATA
 STEP 1) If the HTTP request was succesful, the microservice will return a JSON object, stored in the manner in which it was called by the client.
+        In this example, the JSON object is returned as 'data'.
 
         Example: 
 
                 const response = await fetch(`http://localhost:8221/activity?type=${type}&participants=${participants}&price=${price}&accessibility=${accessibility}`);
 
                 const data = await response.json();
-                
+
                 return data;
 
 
