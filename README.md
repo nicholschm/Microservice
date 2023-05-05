@@ -1,6 +1,6 @@
 # CS_361_BORED_API_MICROSERVICE
- Microservice which calls the Bored API through HTTP requests.
- The microservice will return a JSON object with activity data/properties for use in an application.
+This microservice incorporates an Express server which allows clients to interact with the microservice through HTTP requests.
+This server is hosted on PORT 8221 by default, and contains only a single endpoint '/activity'.
 
 # Communication Contract
 ------------------------
@@ -9,36 +9,47 @@
 # REQUESTING DATA
 To request data from this microservice:
 
-Step 1) Download the 'bored_api_microservice.mjs' file and store it in a local directory.
+Step 1) In your terminal, navigate to the directory in which 'server.mjs' is stored.
 
-Step 2) Import the 'getBoredActivity' function into the application in which you wish to use it. 
+Step 2) In your terminal, run the command 'npm start'. The Express server should now be running on PORT 8221.
 
-        (Example: import getBoredActivity from "./bored_api_microservice.mjs";)
+Step 3) Make a GET request to the '/activity' endpoint. This request must contain 4 parameters:
+                -type: A string representing the type of activity you want to retrieve. Options are:
+                        "education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"
+                -participants: The number of people who should be involved in the activity. Must be a positive integer (greater than 0).
+                -price: The price range of the activity, represented as a float between 0 and 1. 0 represents a free activity, 1 represents an activity 
+                        that costs money.
+                -accessibility: The level of ease or difficulty of the activity, represented as a float between 0 and 1. 0 represents an activity   
+                        that requires a lot of skill or knowledge, 1 represents an activity that anyone can do.
 
-Step 3) Call the getBoredActivity function with the 4 valid parameters to use the microservice to make an API call to the Bored API via HTTP request.
-
-        (Example: const result = await getBoredActivity('relaxation', 1, 0, 0);
+Example request: http://localhost:8221/activity?type=recreational&participants=1&price=0&accessibility=0
 
 
 # RECEIVING DATA
-STEP 1) If the HTTP request was succesful, 'result' (from the previous step) will contain a JSON object defined as 'data'.
+STEP 1) If the HTTP request was succesful, the microservice will return a JSON object, stored in the manner in which it was called by the client.
+        Example: 
+                const response = await fetch(`http://localhost:8221/activity?type=${type}&participants=${participants}&price=${price}&accessibility=${accessibility}`);
 
-STEP 2) The JSON object's activity details can be accessed through dot notation, with the prefix 'result.data' as the base.
+                const data = await response.json();
+                return data;
+
+
+STEP 2) The JSON object's activity details can be accessed through dot notation, with the format 'data.*property*'.
 
         The properties of the activity can be accessed like so:
 
         {
-            result.data.activity: 'Give your pet ten minutes of focused attention',
+            data.activity: 'Write a poem',
 
-            result.data.type: 'relaxation',
+            data.type: 'recreational',
 
-            result.data.participants: 1,
+            data.participants: 1,
 
-            result.data.price: 0,
+            data.price: 0,
 
-            result.data.key: '9937387',
+            data.key: '8688620',
 
-            result.data.accessibility: 0
+            data.accessibility: 0
         }
 
 # NOTES
