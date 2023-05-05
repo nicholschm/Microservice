@@ -14,11 +14,15 @@ Step 1) In your terminal, navigate to the directory in which 'server.mjs' is sto
 Step 2) In your terminal, run the command 'npm start'. The Express server should now be running on PORT 8221.
 
 Step 3) Make a GET request to the '/activity' endpoint. This request must contain 4 parameters:
+
                 -type: A string representing the type of activity you want to retrieve. Options are:
                         "education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"
+
                 -participants: The number of people who should be involved in the activity. Must be a positive integer (greater than 0).
+
                 -price: The price range of the activity, represented as a float between 0 and 1. 0 represents a free activity, 1 represents an activity 
                         that costs money.
+
                 -accessibility: The level of ease or difficulty of the activity, represented as a float between 0 and 1. 0 represents an activity   
                         that requires a lot of skill or knowledge, 1 represents an activity that anyone can do.
 
@@ -27,10 +31,13 @@ Example request: http://localhost:8221/activity?type=recreational&participants=1
 
 # RECEIVING DATA
 STEP 1) If the HTTP request was succesful, the microservice will return a JSON object, stored in the manner in which it was called by the client.
+
         Example: 
+
                 const response = await fetch(`http://localhost:8221/activity?type=${type}&participants=${participants}&price=${price}&accessibility=${accessibility}`);
 
                 const data = await response.json();
+                
                 return data;
 
 
