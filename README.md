@@ -65,4 +65,4 @@ STEP 2) The JSON object's activity details can be accessed through dot notation,
 - Error validation is implemented on the microservice's end, in the event an activity was unable to be retrieved from the API.
 
 # UML DIAGRAM
-<img src="https://github.com/nicholschm/CS_361_BORED_API_MICROSERVICE/blob/main/UML.png" alt="UML DIAGRAM">
+<img src="https://github.com/nicholschm/MICROSERVICE/blob/main/UML.png" alt="UML DIAGRAM">
